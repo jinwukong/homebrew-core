@@ -2,7 +2,7 @@ class Getdns < Formula
   desc "Modern asynchronous DNS API"
   homepage "https://getdnsapi.net"
   license "BSD-3-Clause"
-  revision 1
+  revision 2
   head "https://github.com/getdnsapi/getdns.git", branch: "develop"
 
   stable do
@@ -46,7 +46,7 @@ class Getdns < Formula
   depends_on "libevent"
   depends_on "libidn2"
   depends_on "libuv"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "unbound"
 
   deny_network_access!
