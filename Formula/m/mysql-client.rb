@@ -5,6 +5,7 @@ class MysqlClient < Formula
   mirror "https://repo.mysql.com/apt/ubuntu/pool/mysql-innovation/m/mysql-community/mysql-community_26.7.0.orig.tar.gz"
   sha256 "95e949183b94bbe39e70c6355e6c90d2a640a62ede996ca5f7a6a3e0827a3260"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
+  revision 1
   compatibility_version 1
 
   livecheck do
@@ -27,7 +28,7 @@ class MysqlClient < Formula
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
   depends_on "libfido2"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "zlib-ng-compat" # Zlib 1.2.13+
   depends_on "zstd"
 
@@ -53,6 +54,17 @@ class MysqlClient < Formula
   fails_with :gcc do
     version "9"
     cause "Requires C++20"
+  end
+
+  # Backports to support OpenSSL 4
+  patch do
+    file "Patches/mysql/26.7.0.diff"
+    type :backport # https://github.com/mysql/mysql-server/commit/04ba58a223afc1339c75b080825042ad17a85b43
+  end
+  patch do
+    url "https://github.com/mysql/mysql-server/commit/a045c23214ec225c49d9bc4caeea78d3d1f99ba9.patch?full_index=1"
+    sha256 "b597781554b7fbcf4e13402dc8dca97bea59e059ed6e40e4eb71cd5c26a91ad9"
+    type :backport
   end
 
   deny_network_access!
