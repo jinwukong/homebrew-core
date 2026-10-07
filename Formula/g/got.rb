@@ -5,6 +5,7 @@ class Got < Formula
   mirror "https://pkg.freebsd.org/ports-distfiles/got-portable-0.129.tar.gz"
   sha256 "420f2e9be88b5e7de33b247f6ae21b918c113cceb2cb9a94b37a46d514f30a3e"
   license "ISC"
+  revision 1
 
   # Since GitHub runners are not able to access the homepage, our Linux build
   # requires FreeBSD mirror to exist before we can bump the version.
@@ -28,7 +29,7 @@ class Got < Formula
   depends_on "libevent"
   depends_on "libretls"
   depends_on "ncurses"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   on_linux do
     depends_on "libbsd"
