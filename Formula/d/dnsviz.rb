@@ -6,6 +6,7 @@ class Dnsviz < Formula
   url "https://files.pythonhosted.org/packages/50/33/de6ddf145bdb6c94ee25b33bc314af3bdbd15950c5a4647295da224ab58f/dnsviz-0.11.2.tar.gz"
   sha256 "ca136788bd868c03b1f2653575d899ffef41a016711655c0ee65f89c1bea3514"
   license "GPL-2.0-or-later"
+  revision 1
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "8e48b3e7cb89aa85550f66524d85ed5950756c0431402824a5d9406c4f8c01f1"
@@ -21,7 +22,7 @@ class Dnsviz < Formula
   depends_on "json-c" => :test
   depends_on "cryptography" => :no_linkage
   depends_on "graphviz"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "python@3.14"
 
   pypi_packages extra_packages: ["dnspython", "pygraphviz", "setuptools"]
