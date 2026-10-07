@@ -8,6 +8,7 @@ class MemtierBenchmark < Formula
     "GPL-2.0-or-later" => { with: "cryptsetup-OpenSSL-exception" },
     any_of: ["CC0-1.0", "BSD-2-Clause"], # deps/hdr_histogram/LICENSE.txt
   ]
+  revision 1
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "5bc531a8c6d51bfd71b925e492e351c51a12c3a5f9c50667e3ad1818897dbd94"
@@ -24,10 +25,17 @@ class MemtierBenchmark < Formula
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
   depends_on "libevent"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   on_linux do
     depends_on "zlib-ng-compat"
+  end
+
+  # Backport fix for OpenSSL 4
+  patch do
+    url "https://github.com/redis/memtier_benchmark/commit/fc668d743cb31109f4c788861f3fc315b028132e.patch?full_index=1"
+    sha256 "5b36d6aa2e90ec171badbf39478b7458af84cf95fe17fa1681824b8146351789"
+    type :backport
   end
 
   def install
